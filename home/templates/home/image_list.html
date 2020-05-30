@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-list">
+<!--Row with two equal columns-->
+    {% for image in image_list %}
+    <div class="row">
+        <div class="col-xl-12 col-sm-3">
+            <img src="{{ image.image.url }}" alt="" style="width: 23.5rem">
+             <p><span style="font-weight: bold;">{{ image.author }}</span> <span>{{ image.image_description }}</span></p>
+             <button class="btn btn-outline-success" style="width: 200px"><a href="{% url 'detail' pk=image.pk %}">View Image</a></button>
+
+        {% if author == self.request.user %}
+        <button class="btn btn-danger" style="width: 200px">
+        <a href="{% url 'delete' pk=image.pk %}">Delete Image</a>
+        </button>
+            {% else %}
+            <a href="{% url 'delete' pk=image.pk %}">Nope</a>
+        {% endif %}
+
+            {% endfor %}
+        </div>
+</div>
+      </div>
+
+
+
+
+
+
+    <style>
+.container-list{
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    margin-left: -20px;
+    image-rendering: optimizeSpeed;
+    margin-top: -10px;
+}
+.btn-outline-success{
+    margin: 10px;
+}
+
+
+    </style>
+{% endblock %}

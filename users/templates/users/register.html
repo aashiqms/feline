@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block register %}
+    {{ form.media }}
+    <form method="POST" style="margin: 10px">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Register Now</legend>
+        {{ form|crispy }}
+
+    </fieldset>
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-success">Submit</button>
+        </div>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already have a account? <a href="" class="ml-2">
+            Sign In
+        </a>
+        </small>
+
+    </div>
+    </form>
+{% endblock %}
+
