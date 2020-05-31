@@ -5,6 +5,9 @@
   border: 1px solid #dddddd;
   border-radius: 3px;
   margin-bottom: 20px;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
 
 }
 .account-img {
