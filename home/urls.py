@@ -11,4 +11,5 @@ urlpatterns = [
     path('upload/', views.ImageUploadByUser.as_view(), name='upload'),
     path('update/<int:pk>', views.ImageUpdateView.as_view(), name='update'),
     path('delete/<int:pk>', views.ImageDeleteView.as_view(), name='delete'),
+
 ]

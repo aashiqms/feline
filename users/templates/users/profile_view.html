@@ -1,12 +1,25 @@
 {% extends 'base.html' %}
-{% block content %}
- <div class="content-section">
-      <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-        <div class="media-body">
-          <h2 class="account-heading">{{ user.username }}</h2>
-          <p class="text-secondary">{{ user.email }}</p>
-            <p class="text-secondary">{{ user.about_me }}</p>
-        </div>
-      </div>
+{% load static%}
+{% load bootstrap4 %}
+{% block user_posts %}
+{% for image in all_images %}
+    <a href="{% url 'detail' pk=image.pk %}"> <img src="{{ image.image.url }}" alt="" style="width: 175px;"></a>
+     <div class="btn-group">
+  <a type="" class=""></a>
+  <button type="button" class="dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="{% url 'delete' pk=image.pk %}">Delete</a>
+    <a class="dropdown-item" href="{% url 'detail' pk=image.pk %}">FullScreen</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Separated link</a>
+  </div>
+</div>
+    <hr>
+
+
+{% endfor %}
+
 {% endblock %}
