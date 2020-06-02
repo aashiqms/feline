@@ -1,12 +1,15 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, request, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, DeleteView, UpdateView
 
 from home.forms import ImageForm
+from django.http import Http404
 from home.models import Image
+
 from users.models import Profile
 
 
@@ -31,9 +34,19 @@ class ImageDetailView(DetailView, LoginRequiredMixin):
 
 class ImageListView(ListView, LoginRequiredMixin):
     model = Image
+    template_name = 'home/image_list.html'
+    context_object_name = 'images'
 
     def get_queryset(self):
-        return Image.objects.all()
+
+        queryset = {'user_posts': Image.objects.all().filter(author=self.request.user), 'all_posts': Image.objects.all()}
+        return queryset
+
+
+@login_required()
+def profile(request):
+    user_images = Image.objects.all().filter(author=request.user)
+    return render(request, 'users/profile_view.html',  {"all_images": user_images})
 
 
 def getting_username(request):
@@ -50,8 +63,13 @@ class ImageDeleteView(DeleteView):
         return queryset
 
 
-
 class ImageUpdateView(UpdateView, LoginRequiredMixin):
     model = Image
     form_class = ImageForm
+
+
+
+
+
+
 

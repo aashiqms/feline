@@ -1,46 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container-list">
+<div class="flex-container">
 <!--Row with two equal columns-->
-    {% for image in image_list %}
+    {% for image in images.all_posts %}
     <div class="row">
-        <div class="col-xl-12 col-sm-3">
+        <div class="col-xl-12 col-sm-3" style="text-align: center">
             <img src="{{ image.image.url }}" alt="" style="width: 23.5rem">
-             <p><span style="font-weight: bold;">{{ image.author }}</span> <span>{{ image.image_description }}</span></p>
-             <button class="btn btn-outline-success" style="width: 200px"><a href="{% url 'detail' pk=image.pk %}">View Image</a></button>
-
-        {% if author == self.request.user %}
-        <button class="btn btn-danger" style="width: 200px">
-        <a href="{% url 'delete' pk=image.pk %}">Delete Image</a>
-        </button>
-            {% else %}
-            <a href="{% url 'delete' pk=image.pk %}">Nope</a>
-        {% endif %}
-
-            {% endfor %}
-        </div>
+             <p><span style="font-weight: bold;color: black">{{ image.author }}</span> <span style="color:black;">{{ image.image_description }}</span></p>
 </div>
-      </div>
-
-
-
-
-
-
+    </div>
+            {% endfor %}
+</div>
+    {% endblock %}
     <style>
-.container-list{
-    justify-content: center;
-    align-content: center;
-    text-align: center;
-    margin-left: -20px;
-    image-rendering: optimizeSpeed;
-    margin-top: -10px;
-}
-.btn-outline-success{
-    margin: 10px;
-}
+.flex-container{
 
+    align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        margin: 10% 0;
+        min-height: 200px;
+        background-color: rgba(33, 33, 33, .3);
+
+}
 
     </style>
-{% endblock %}
