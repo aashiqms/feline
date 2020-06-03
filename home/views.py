@@ -17,7 +17,7 @@ def about(request):
     return render(request, 'home/about.html', {'title': 'about'})
 
 
-class ImageUploadByUser(CreateView, LoginRequiredMixin):
+class ImageCreateView(CreateView, LoginRequiredMixin):
 
     form_class = ImageForm
     model = Image
@@ -38,7 +38,6 @@ class ImageListView(ListView, LoginRequiredMixin):
     context_object_name = 'images'
 
     def get_queryset(self):
-
         queryset = {'user_posts': Image.objects.all().filter(author=self.request.user), 'all_posts': Image.objects.all()}
         return queryset
 

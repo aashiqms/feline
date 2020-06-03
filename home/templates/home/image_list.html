@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% if user.is_authenticated %}
 
 {% block content %}
 <div class="flex-container">
@@ -13,6 +14,10 @@
             {% endfor %}
 </div>
     {% endblock %}
+{% else %}
+    <meta http-equiv="refresh" content="0; url={% url 'login' %}" />
+
+{% endif %}
     <style>
 .flex-container{
 

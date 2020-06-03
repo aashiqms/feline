@@ -1,6 +1,36 @@
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
 {% load static%}
 {% load bootstrap4 %}
+
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+            <p class="text-secondary">{{ user.about_me }}</p>
+        </div>
+      </div>
+      <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Profile Info</legend>
+              {{ u_form|crispy }}
+              {{ p_form|crispy }}
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-info" type="submit">Update</button>
+          </div>
+      </form>
+    </div>
+{% endblock %}
+
+
+
+
+
 {% block user_posts %}
 {% for image in all_images %}
     <a href="{% url 'detail' pk=image.pk %}"> <img src="{{ image.image.url }}" alt="" style="width: 175px;"></a>
